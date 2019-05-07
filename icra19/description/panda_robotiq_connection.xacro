@@ -1,0 +1,7 @@
+<robot<xacro:macro name="panda_robotiq_connector">
+  <joint name="panda_robotiq_attachment_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="panda_link8"/>
+    <child link="robotiq_85_adapter_link"/>
+  </joint>
+</xacro:macro>

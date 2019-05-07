@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<launch>
+  <arg name="robot_ip" />
+  <arg name="load_gripper" value="false"/>
+  <include file="$(find franka_control)/launch/franka_control.launch">
+    <arg name="robot_ip" value="$(arg robot_ip)" />
+    <arg name="load_gripper" value="(arg load_gripper)" />
+  </include>
+  <include file="$(find panda_moveit_config)/launch/move_group.launch">
+    <arg name="load_gripper" value="$(arg load_gripper)" />
+  </include>
+  <include file="$(find franka_visualization)/launch/franka_visualization.launch">
+    <arg name="load_gripper" value="$(arg load_gripper)" />
+    <arg name="robot_ip" value="$(arg robot_ip)" />
+  </include>
+  <rosparam command="load" file="$(find icra18)/config/controllers.yaml" />
+  <node name="demo" pkg="icra18" type="demo.py" output="screen" required="true">
+    <rosparam param="demos">[pick_and_place]</rosparam>
+  </node>
+</launch>
