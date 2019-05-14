@@ -1,0 +1,6 @@
+# Move to initial joint configuration
+- type: moveit_joint
+  params:
+    position: [0.000238275,0.0,0.0,0.0,0.0,0.0,0.0]
+    acc: 1.0
+    vel: 1.0

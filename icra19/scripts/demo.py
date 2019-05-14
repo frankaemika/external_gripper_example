@@ -4,7 +4,7 @@ import actionlib_msgs.msg
 import franka_gripper.msg
 import franka_control.srv
 import geometry_msgs.msg
-from control_msgs import GripperCommandAction, GripperCommandGoal. GripperCommandResult
+from control_msgs import GripperCommandAction, GripperCommandGoal, GripperCommandResult
 import controller_manager_msgs.srv
 import moveit_commander
 import actionlib
@@ -30,11 +30,11 @@ class Context:
         #    franka_gripper.msg.GraspAction)
         #self.gripper_grasp.wait_for_server()
 
-        rospy.loginfo('Waiting for robotiq_f_85/gripper_command')
-        self.gripper_move = actionlib.SimpleActionClient(
-            'robotiq_f_85/gripper_command',
-            GripperCommandAction)
-        self.gripper_move.wait_for_server()
+        #rospy.loginfo('Waiting for robotiq_f_85/gripper_command')
+        #self.gripper_move = actionlib.SimpleActionClient(
+        #    'robotiq_f_85/gripper_command',
+        #    GripperCommandAction)
+        #self.gripper_move.wait_for_server()
 
         rospy.loginfo('Waiting for controller_manager/switch_controller')
         self.switch_controller = rospy.ServiceProxy(
@@ -94,33 +94,35 @@ def moveit_cart(ctx, pos, rot, acc=0.1, vel=0.1):
 
 
 def gripper_move(ctx, width, effort):
+    rospy.loginfo("inside gripper_move function")
     ##### EXTERNAL GRIPPER HERE ############
-    #             epsilon_inner=0.005, epsilon_outer=0.005,
-    #             speed=0.1, force=10):
-    goal = GripperCommandGoal(positioni=width, effort=effort)
-    rospy.loginfo('Moving gripper:\n{}'.format(goal))
-    ctx.gripper_move.send_goal(goal)
-    ctx.gripper_move.wait_for_result()
-    if not ctx.gripper_move.get_result().reached_goal:
-        rospy.logerr("Couldn't move gripper")
-        sys.exit(1)
+    #epsilon_inner=0.005, epsilon_outer=0.005,
+    #   #             speed=0.1, force=10):
+    #   goal = GripperCommandGoal(positioni=width, effort=effort)
+    #   rospy.loginfo('Moving gripper:\n{}'.format(goal))
+    #   ctx.gripper_move.send_goal(goal)
+    #   ctx.gripper_move.wait_for_result()
+    #   if not ctx.gripper_move.get_result().reached_goal:
+    #       rospy.logerr("Couldn't move gripper")
+    #       sys.exit(1)
 
 
 def gripper_grasp(ctx, width, effort):
-    max_gripper_width = 0.08
-    ###### EXTERNAL GRIPPER HERE ###########
-    goal = GripperCommandGoal(position=width, effort)
-    rospy.loginfo('Grasping:\n{}'.format(goal))
-    ctx.gripper_grasp.send_goal(goal)
-    ctx.gripper_grasp.wait_for_result()
-
-    while not ctx.gripper_grasp.get_result().reached_goal:
-        rospy.logerr('Failed to grasp, retry')
-        gripper_move(ctx, width=max_gripper_width)
-        ctx.gripper_grasp.send_goal(goal)
-        ctx.gripper_grasp.wait_for_result()
-        if rospy.is_shutdown():
-            sys.exit(0)
+    rospy.loginfo("inside gripper_grasph function")
+    #max_gripper_width = 0.08
+    ####### EXTERNAL GRIPPER HERE ###########
+    #goal = GripperCommandGoal(position=width, effort)
+    #rospy.loginfo('Grasping:\n{}'.format(goal))
+    #ctx.gripper_grasp.send_goal(goal)
+    #ctx.gripper_grasp.wait_for_result()
+#
+#    while not ctx.gripper_grasp.get_result().reached_goal:
+#        rospy.logerr('Failed to grasp, retry')
+#        gripper_move(ctx, width=max_gripper_width)
+#        ctx.gripper_grasp.send_goal(goal)
+#        ctx.gripper_grasp.wait_for_result()
+#        if rospy.is_shutdown():
+#            sys.exit(0)
 
 
 def run_controller(ctx, controller_name, wait=5):

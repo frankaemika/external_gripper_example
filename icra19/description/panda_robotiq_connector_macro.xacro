@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="hand">
+  <xacro:macro name="panda_robotiq_connector">
+    <link name="panda_link8"/>
+    <joint name="panda_robotiq_attachment_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 -1.5707963268 0"/>
+      <parent link="panda_link8"/>
+      <child link="robotiq_85_adapter_link"/>
+    </joint>
+  </xacro:macro>
+</robot>
