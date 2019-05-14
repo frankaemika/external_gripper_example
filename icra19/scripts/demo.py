@@ -4,7 +4,7 @@ import actionlib_msgs.msg
 import franka_gripper.msg
 import franka_control.srv
 import geometry_msgs.msg
-from control_msgs import GripperCommandAction, GripperCommandGoal, GripperCommandResult
+from control_msgs.msg import GripperCommandAction, GripperCommandGoal, GripperCommandResult
 import controller_manager_msgs.srv
 import moveit_commander
 import actionlib

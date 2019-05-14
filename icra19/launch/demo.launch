@@ -19,29 +19,23 @@
 
 <group ns="panda">
     <node pkg="tf" type="static_transform_publisher" name="map_frame_static_publisher" args="0 0 0 0 0 0 map panda_link0 100" /> 
-<!--
- <node pkg="tf" type="static_transform_publisher" name="robotiq_mounting_static_publisher" args="0 0 0 0 -1.5707963268 0 panda_link8 robotiq_85_adapter_link 100" /> 
--->
 
     <include file="$(find franka_control)/launch/franka_control.launch">
       <arg name="robot_ip" value="$(arg robot_ip)" />
       <arg name="load_gripper" value="$(arg load_gripper)" />
     </include>
 
+<!--
     <node name="trajectory_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="position_joint_trajectory_controller"/>
-    
+-->    
     <include file="$(find panda_moveit_config)/launch/move_group.launch">
       <arg name="load_gripper" value="$(arg load_gripper)" />
     </include>
-<!--
   <node name="demo" pkg="icra19" type="demo.py" output="screen" required="true">
     <rosparam param="demos">[pick_and_place]</rosparam>
     <rosparam param="controllers">[position_joint_trajectory_controller]</rosparam>
   </node>
--->
-<!--
-  <node pkg="rviz" type="rviz" output="screen" name="rviz" args="-d $(find icra19)/launch/panda_arm.rviz"/>
--->
 </group>
+
 <node pkg="rviz" type="rviz" output="screen" name="rviz"/>
 </launch>
