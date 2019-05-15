@@ -44,8 +44,8 @@ icra19/config/pick_and_place.yaml
 
 The `icra19/scripts/demo.py` script will process them. It supports 4 possible steps:
   
-    - `moveit_cart`: go to a specific Cartesian pose using MoveIt!.
-    - `moveit_joint`: go to a specific joint configuration using MoveIt!.
-    - `gripper_move`: move the Robotiq 2F-85 Gripper to a specific gripper position between `0.0: closed and `1.0: open`.
-    - `set_collision_behavior`: set the collision behavior for the robot.
+- `moveit_cart`: go to a specific Cartesian pose using MoveIt!.
+- `moveit_joint`: go to a specific joint configuration using MoveIt!.
+- `gripper_move`: move the Robotiq 2F-85 Gripper to a specific gripper position between `0.0: closed and `1.0: open`.
+- `set_collision_behavior`: set the collision behavior for the robot.
 
