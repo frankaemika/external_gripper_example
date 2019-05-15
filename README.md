@@ -9,8 +9,9 @@ The software package was successfully tested with the following dependencies
 - `libfranka` == 0.5.0
 - `franka_ros` == 0.6.0
 - `robotiq_2finger_grippers` == 0.9.1
+- `panda_moveit_config` == 0.7.2
 
-For the installation of 'libfranka' and 'franka_ros' please refer to [Franka Control Interface Documentation](https://frankaemika.github.io/docs/overview.html). For the interaction with the Robotiq 2F-85 Gripper the package `robotiq_2finger_grippers` must be cloned into the ROS workspace from:
+For the installation of 'libfranka', 'franka_ros' and `panda_moveit_config` please refer to [Franka Control Interface Documentation](https://frankaemika.github.io/docs/overview.html). For the interaction with the Robotiq 2F-85 Gripper the package `robotiq_2finger_grippers` must be cloned into the ROS workspace from:
 
 ```
 https://github.com/Danfoa/robotiq_2finger_grippers
