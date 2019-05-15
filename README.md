@@ -29,7 +29,7 @@ icra19/config/endeffector-config.json
 
  2. Connect the Gripper to your Computer. In our Setup the Gripper was connected using the Robotiq K-1444 Universal Controller. See Robotiq's support Page for further information.
 
- 3. Launch the Demo Script to execute the examplary Pick-and-Place sequence passing your Panda's IP addressi and the USB device name of your Robotiq 2F-85 Gripper (e.g.: "/dev/ttyUSB1"). Attention: In our example the Gripper's driver provided to devices.
+ 3. Launch the Demo Script to execute the examplary Pick-and-Place sequence passing your Panda's IP address and the USB device name of your Robotiq 2F-85 Gripper (e.g.: "/dev/ttyUSB1"). Attention: In our example the Gripper's driver provided to devices.
 
 ```
 roslaunch icra19 demo.launch robot_ip:=<robot-ip> gripper_dev_name:=<gripper-dev-name>
