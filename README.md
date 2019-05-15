@@ -11,7 +11,7 @@ The software package was successfully tested with the following dependencies
 - `robotiq_2finger_grippers` == 0.9.1
 - `panda_moveit_config` == 0.7.2
 
-For the installation of 'libfranka', 'franka_ros' and `panda_moveit_config` please refer to [Franka Control Interface Documentation](https://frankaemika.github.io/docs/overview.html). For the interaction with the Robotiq 2F-85 Gripper the package `robotiq_2finger_grippers` must be cloned into the ROS workspace from:
+For the installation of 'libfranka', 'franka_ros' and `panda_moveit_config` please refer to [Franka Control Interface Documentation](https://frankaemika.github.io/docs/overview.html). For the interaction with the Robotiq 2F-85 Gripper the package `robotiq_2finger_grippers` must be cloned and built into the ROS workspace from:
 
 ```
 https://github.com/Danfoa/robotiq_2finger_grippers
@@ -43,8 +43,9 @@ icra19/config/pick_and_place.yaml
 ```
 
 The `icra19/scripts/demo.py` script will process them. It supports 4 possible steps:
-    * `moveit_cart`: go to a specific Cartesian pose using MoveIt!.
-    * `moveit_joint`: go to a specific joint configuration using MoveIt!.
-    * `gripper_move`: move the Robotiq 2F-85 Gripper to a specific gripper position between `0.0: closed and `1.0: open`.
-    * `set_collision_behavior`: set the collision behavior for the robot.
+  
+    - `moveit_cart`: go to a specific Cartesian pose using MoveIt!.
+    - `moveit_joint`: go to a specific joint configuration using MoveIt!.
+    - `gripper_move`: move the Robotiq 2F-85 Gripper to a specific gripper position between `0.0: closed and `1.0: open`.
+    - `set_collision_behavior`: set the collision behavior for the robot.
 
