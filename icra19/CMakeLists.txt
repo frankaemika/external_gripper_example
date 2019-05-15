@@ -16,6 +16,7 @@ find_package(catkin REQUIRED COMPONENTS
   realtime_tools
   roscpp
   rospy
+  robotiq_2f_gripper_msgs
 )
 
 find_package(Franka 0.4.0 REQUIRED)

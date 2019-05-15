@@ -28,5 +28,6 @@
   <exec_depend>rosparam</exec_depend>
   <exec_depend>rospkg</exec_depend>
   <exec_depend>robotiq_2f_gripper_control</exec_depend>
+  <exec_depend>robotiq_2f_gripper_msgs></exec_depend>
 
 </package>
