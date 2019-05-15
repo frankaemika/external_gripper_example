@@ -2,7 +2,9 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="panda_robotiq">
   
   <xacro:include filename="$(find icra19)/description/panda_robotiq_connector_macro.xacro"/>
-  <xacro:include filename="$(find robotiq_2f_c2_gripper_visualization)/urdf/robotiq_c2_model_macro.xacro"/>
+  <xacro:include filename="$(find robotiq_2f_85_gripper_visualization)/urdf/robotiq_arg2f_85_model.xacro"/>
   <xacro:panda_robotiq_connector/>
-  <xacro:robotiq_c2_model prefix=""/>
+  <!--
+  <xacro:robotiq_arg2f_85_model prefix=""/>
+  -->
 </robot>

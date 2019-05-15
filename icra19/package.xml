@@ -27,5 +27,6 @@
   <exec_depend>rospy</exec_depend>
   <exec_depend>rosparam</exec_depend>
   <exec_depend>rospkg</exec_depend>
+  <exec_depend>robotiq_2f_gripper_control</exec_depend>
 
 </package>

@@ -3,21 +3,32 @@
   <arg name="robot_ip" />
   <arg name="load_gripper" value="false"/>
   <arg name="publish_rate" value="30"/>
+  <arg name="gripper_dev_name" default="/dev/ttyUSB1"/>
 
-  <!--
-  <param name="robot_description" command="$(find xacro)/xacro -  -inorder '$(find franka_description)/robots/panda_arm.urdf.xacro'" unless="$(arg load_gripper)" />
-  -->
   <group ns="robotiq_gripper">
     <param name="robot_description" command="$(find xacro)/xacro --inorder $(find icra19)/description/panda_robotiq.urdf.xacro" />
-    <node name="gripper_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
-      <remap from="robot_description" to="robot_description" />
-    </node>
+<!--
+    <node name="gripper_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen"/>
     <node name="gripper_joint_state_publisher" type="joint_state_publisher" pkg="joint_state_publisher" output="screen">
       <remap from="robot_description" to="robot_description"/>
     </node>
-</group>
+-->
+    <include file="$(find robotiq_2f_gripper_control)/launch/robotiq_action_server.launch">
+        <arg name="comport" value="$(arg gripper_dev_name)"/>
+    </include>
+<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+        <param name="robot_description" value="robot_description"/>
+        <param name="publish_frequency" type="double" value="100.0" />
+    </node>
 
-<group ns="panda">
+    <node name="gripper_joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <rosparam param="source_list">[/joint_states]</rosparam>
+        <rosparam param="use_gui">false</rosparam>
+    </node>
+
+  </group>
+
+  <group ns="panda">
     <node pkg="tf" type="static_transform_publisher" name="map_frame_static_publisher" args="0 0 0 0 0 0 map panda_link0 100" /> 
 
     <include file="$(find franka_control)/launch/franka_control.launch">
@@ -25,17 +36,14 @@
       <arg name="load_gripper" value="$(arg load_gripper)" />
     </include>
 
-<!--
-    <node name="trajectory_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="position_joint_trajectory_controller"/>
--->    
     <include file="$(find panda_moveit_config)/launch/move_group.launch">
       <arg name="load_gripper" value="$(arg load_gripper)" />
     </include>
-  <node name="demo" pkg="icra19" type="demo.py" output="screen" required="true">
-    <rosparam param="demos">[pick_and_place]</rosparam>
-    <rosparam param="controllers">[position_joint_trajectory_controller]</rosparam>
-  </node>
-</group>
+    <node name="demo" pkg="icra19" type="demo.py" output="screen" required="false">
+      <rosparam param="demos">[pick_and_place]</rosparam>
+      <rosparam param="controllers">[position_joint_trajectory_controller]</rosparam>
+    </node>
+  </group>
 
-<node pkg="rviz" type="rviz" output="screen" name="rviz"/>
+  <node pkg="rviz" type="rviz" output="screen" name="rviz"/>
 </launch>
