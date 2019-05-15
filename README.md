@@ -25,9 +25,12 @@ This repository was chosen for the control of the Robotiq gripper, because it pr
 icra19/config/endeffector-config.json
 ```
 
- 2. Launch the Demo Script to execute the examplary Pick-and-Place sequence passing your Panda's IP address.
+ 2. Connect the Gripper to your Computer. In our Setup the Gripper was connected using the Robotiq K-1444 Universal Controller. See Robotiq's support Page for further information.
+
+ 3. Launch the Demo Script to execute the examplary Pick-and-Place sequence passing your Panda's IP addressi and the USB device name of your Robotiq 2F-85 Gripper (e.g.: "/dev/ttyUSB1"). Attention: In our example the Gripper's driver provided to devices.
+
 ```
-roslaunch icra19 demo.launch robot_ip:=<robot-ip>
+roslaunch icra19 demo.launch robot_ip:=<robot-ip> gripper_dev_name:=<gripper-dev-name>
 ```
 
 ## Customization
@@ -46,5 +49,5 @@ The `icra19/scripts/demo.py` script will process them. It supports 4 possible st
 To get specific parameters for your custom `moveit_joint`, `moveit_cart` steps you might find useful running the teaching launch file, which constantly prints the robot pose and the gripper width, by executing
 
 ```
-roslaunch icra18 teaching.launch robot_ip:=<robot-ip>
+roslaunch icra19 teaching.launch robot_ip:=<robot-ip>
 ```

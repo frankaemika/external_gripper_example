@@ -3,29 +3,18 @@
   <arg name="robot_ip" />
   <arg name="load_gripper" value="false"/>
   <arg name="publish_rate" value="30"/>
-  <arg name="gripper_dev_name" default="/dev/ttyUSB1"/>
+  <arg name="gripper_dev_name"/>
 
   <group ns="robotiq_gripper">
     <param name="robot_description" command="$(find xacro)/xacro --inorder $(find icra19)/description/panda_robotiq.urdf.xacro" />
-<!--
-    <node name="gripper_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen"/>
-    <node name="gripper_joint_state_publisher" type="joint_state_publisher" pkg="joint_state_publisher" output="screen">
-      <remap from="robot_description" to="robot_description"/>
-    </node>
--->
     <include file="$(find robotiq_2f_gripper_control)/launch/robotiq_action_server.launch">
         <arg name="comport" value="$(arg gripper_dev_name)"/>
     </include>
-<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
-        <param name="robot_description" value="robot_description"/>
-        <param name="publish_frequency" type="double" value="100.0" />
-    </node>
-
-    <node name="gripper_joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
         <rosparam param="source_list">[/joint_states]</rosparam>
         <rosparam param="use_gui">false</rosparam>
     </node>
-
   </group>
 
   <group ns="panda">

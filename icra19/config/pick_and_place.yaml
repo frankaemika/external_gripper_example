@@ -2,7 +2,7 @@
 - type: set_collision_behavior
   params:
     torques: [20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0]
-forces: [20.0, 20.0, 30.0, 25.0, 25.0, 25.0]
+    forces: [20.0, 20.0, 30.0, 25.0, 25.0, 25.0]
 
 # Move to initial joint configuration
 - type: moveit_joint

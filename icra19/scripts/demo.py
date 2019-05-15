@@ -87,7 +87,6 @@ def moveit_cart(ctx, pos, rot, acc=0.1, vel=0.1):
 
 
 def gripper_move(ctx, position, speed, force):
-    ##### EXTERNAL GRIPPER HERE ############
     goal = CommandRobotiqGripperGoal(position=position, speed=speed, force=force)
     rospy.loginfo('Moving gripper:\n{}'.format(goal))
     ctx.gripper_move.send_goal(goal)
@@ -98,12 +97,6 @@ def gripper_move(ctx, position, speed, force):
     if not abs(result.requested_position - result.position) < 0.01 :
         rospy.logerr("Couldn't move gripper")
         sys.exit(1)
-
-def run_controller(ctx, controller_name, wait=5):
-    ctx.load_controllers([controller_name])
-    if wait is not None:
-        rospy.sleep(rospy.Duration.from_sec(wait))
-    ctx.load_controllers([])
 
 
 def set_collision_behavior(ctx, torques, forces):
@@ -119,7 +112,6 @@ STEPS = {
   'moveit_cart': moveit_cart,
   'moveit_joint': moveit_joint,
   'gripper_move': gripper_move,
-  'run_controller': run_controller,
   'set_collision_behavior': set_collision_behavior,
 }
 
