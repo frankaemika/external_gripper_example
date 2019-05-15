@@ -92,7 +92,7 @@ def gripper_move(ctx, position, speed, force):
     ctx.gripper_move.send_goal(goal)
     ctx.gripper_move.wait_for_result()
     result = ctx.gripper_move.get_result()
-    if not abs(result.requested_position - result.position) < 0.01 :
+    if not abs(result.requested_position - result.position) < 0.001 :
         rospy.logerr("Couldn't move gripper")
         sys.exit(1)
 
