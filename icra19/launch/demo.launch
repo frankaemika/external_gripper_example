@@ -10,7 +10,9 @@
     <include file="$(find robotiq_2f_gripper_control)/launch/robotiq_action_server.launch">
         <arg name="comport" value="$(arg gripper_dev_name)"/>
     </include>
-    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="100.0"/>
+    </node>
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
         <rosparam param="source_list">[/joint_states]</rosparam>
         <rosparam param="use_gui">false</rosparam>

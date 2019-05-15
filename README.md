@@ -5,6 +5,7 @@ It is demonstrated how Panda can be controlled via `franka_ros`
 
 ## Presrequisites
 The software package was successfully tested with the following dependencies
+  
 - `libfranka` == 0.5.0
 - `franka_ros` == 0.6.0
 - `robotiq_2finger_grippers` == 0.9.1
@@ -46,8 +47,3 @@ The `icra19/scripts/demo.py` script will process them. It supports 4 possible st
     * `gripper_move`: move the Robotiq 2F-85 Gripper to a specific gripper position between `0.0: closed and `1.0: open`.
     * `set_collision_behavior`: set the collision behavior for the robot.
 
-To get specific parameters for your custom `moveit_joint`, `moveit_cart` steps you might find useful running the teaching launch file, which constantly prints the robot pose and the gripper width, by executing
-
-```
-roslaunch icra19 teaching.launch robot_ip:=<robot-ip>
-```
