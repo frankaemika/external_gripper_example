@@ -4,7 +4,7 @@
   <arg name="gripper_dev_name"/>
 
   <group ns="robotiq_gripper">
-    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find panda_with_robotiq_gripper_example)/robots/panda_robotiq.urdf.xacro" />
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find panda_with_robotiq_gripper_example)/robots/robotiq_mounted_on_panda.urdf.xacro" />
     <include file="$(find robotiq_2f_gripper_control)/launch/robotiq_action_server.launch">
         <arg name="comport" value="$(arg gripper_dev_name)"/>
     </include>
