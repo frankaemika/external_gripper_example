@@ -1,12 +1,10 @@
 <?xml version="1.0" ?>
 <launch>
   <arg name="robot_ip" />
-  <arg name="load_gripper" value="false"/>
-  <arg name="publish_rate" value="30"/>
   <arg name="gripper_dev_name"/>
 
   <group ns="robotiq_gripper">
-    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find icra19)/description/panda_robotiq.urdf.xacro" />
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find panda_with_robotiq_gripper_example)/robots/panda_robotiq.urdf.xacro" />
     <include file="$(find robotiq_2f_gripper_control)/launch/robotiq_action_server.launch">
         <arg name="comport" value="$(arg gripper_dev_name)"/>
     </include>
@@ -24,13 +22,13 @@
 
     <include file="$(find franka_control)/launch/franka_control.launch">
       <arg name="robot_ip" value="$(arg robot_ip)" />
-      <arg name="load_gripper" value="$(arg load_gripper)" />
+      <arg name="load_gripper" value="false" />
     </include>
 
     <include file="$(find panda_moveit_config)/launch/move_group.launch">
       <arg name="load_gripper" value="$(arg load_gripper)" />
     </include>
-    <node name="demo" pkg="icra19" type="demo.py" output="screen" required="false">
+    <node name="panda_with_robotiq_gripper_example" pkg="panda_with_robotiq_gripper_example" type="panda_with_robotiq_gripper_example.py" output="screen" required="true">
       <rosparam param="demos">[pick_and_place]</rosparam>
       <rosparam param="controllers">[position_joint_trajectory_controller]</rosparam>
     </node>

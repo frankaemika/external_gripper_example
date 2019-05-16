@@ -11,6 +11,24 @@ The software package was successfully tested with the following dependencies
 - `robotiq_2finger_grippers` == 0.9.1
 - `panda_moveit_config` == 0.7.2
 
+
+TODO(jaeh_ch):
+
+```shell
+sudo apt install ros-kinetic-libfranka
+sudo apt install ros-kinetic-franka-ros
+mkdir -p catkin_ws/src
+cd catkin_ws/src
+git clone https://github.com/Danfoa/robotiq_2finger_grippers.git
+git clone https://github.com/ros-planning/panda_moveit_config.git
+git clone https://github.com/frankaemika/icra19_panda_with_robotiq_gripper_example.git
+cd ..
+catkin_make
+source devel/setup.bash
+lsusb | grep robotiq # to find out to what USB Port the gripper is connected
+roslaunch  icra19_panda_with_robotiq_gripper_example icra19_panda_with_robotiq_gripper_example.launch TODO: args 
+```
+
 For the installation of 'libfranka', 'franka_ros' and `panda_moveit_config` please refer to [Franka Control Interface Documentation](https://frankaemika.github.io/docs/overview.html). For the interaction with the Robotiq 2F-85 Gripper the package `robotiq_2finger_grippers` must be cloned and built into the ROS workspace from:
 
 ```

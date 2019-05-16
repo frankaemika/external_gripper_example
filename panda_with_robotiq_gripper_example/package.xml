@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>icra19</name>
+  <name>panda_with_robotiq_gripper_example</name>
   <version>0.0.0</version>
-  <description>Demo code for ICRA 2019</description>
+  <description>Demo code for ICRA 2019 showcasing the usage of a Robotiq gripper with Panda robot</description>
 
   <maintainer email="nicolas.neuburger@franka.de">Nicolas Neuburger</maintainer>
   <maintainer email="christoph.jaehne@franka.de">Christoph Jaehne</maintainer>
@@ -18,13 +18,12 @@
   <depend>libfranka</depend>
   <depend>pluginlib</depend>
   <depend>realtime_tools</depend>
-  <depend>roscpp</depend>
+  <depend>rospy</depend>
 
   <exec_depend>franka_control</exec_depend>
   <exec_depend>franka_gripper</exec_depend>
   <exec_depend>franka_description</exec_depend>
   <exec_depend>panda_moveit_config</exec_depend>
-  <exec_depend>rospy</exec_depend>
   <exec_depend>rosparam</exec_depend>
   <exec_depend>rospkg</exec_depend>
   <exec_depend>robotiq_2f_gripper_control</exec_depend>
