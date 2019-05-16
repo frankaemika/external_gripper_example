@@ -13,12 +13,18 @@ import rosparam
 import os.path
 import sys
 
-node_prefix = 'panda_with_robotiq_gripper_example: '
-timeout = 10.0
+node_prefix = 'panda_with_robotiq_gripper_example: '  # To label log messages coming from this file.
+timeout = 10.0  # [s] Time to wait for services actions and topic to become available.
 
 
 class Context:
+    '''Class that ensures that all services action and topics needed for the application are loaded.
+    '''
+
     def __init__(self, move_group_name):
+        ''' Initialized the Context class by connecting to all services, actions and the movegroup.
+        :param move_group_name Name of the movegroup to use for motion planning.
+        '''
         global node_prefix, timeout
         rospy.loginfo(node_prefix + 'Waiting for move_group/status')
         try:
@@ -69,6 +75,9 @@ class Context:
         self.active_controllers = []
 
     def load_controllers(self, controllers):
+        '''Loads a set of controllers to control the Panda.
+        :param: controllers The set of controllers to load.
+        '''
         global node_prefix
         params = controller_manager_msgs.srv.SwitchControllerRequest()
         params.start_controllers = controllers
@@ -81,6 +90,12 @@ class Context:
 
 
 def moveit_joint(ctx, position, acc=0.1, vel=0.1):
+    '''Performs a joint motion with moveit.
+    :param ctx A Context class instance.
+    :param position The joint pose target.
+    :param acc the acceleration for the motion. [rad/s^2]
+    :param vel the velocity for the motion.  [rad/s]
+    '''
     global node_prefix
     ctx.load_controllers(['position_joint_trajectory_controller'])
     rospy.loginfo(node_prefix + 'Moving to joint position {}'.format(position))
@@ -91,6 +106,12 @@ def moveit_joint(ctx, position, acc=0.1, vel=0.1):
 
 
 def moveit_cart(ctx, pos, rot, acc=0.1, vel=0.1):
+    '''Performs a Cartesian motion with moveit.
+    :param ctx A Context class instance.
+    :param position The Cartesian pose target.
+    :param acc the acceleration for the motion.
+    :param vel the velocity for the motion.
+    '''
     global node_prefix
     ctx.load_controllers(['position_joint_trajectory_controller'])
     rospy.loginfo(node_prefix +
@@ -113,6 +134,12 @@ def moveit_cart(ctx, pos, rot, acc=0.1, vel=0.1):
 
 
 def gripper_move(ctx, position, speed, force):
+    ''' Moves the gripper to a target position (width).
+    :param ctx A Context class instance.
+    :param position The target width. [m]
+    :param speed The target speed for the motion. [m/s]
+    :param force The force to apply. [N]
+    '''
     global node_prefix
     goal = CommandRobotiqGripperGoal(position=position,
                                      speed=speed,
@@ -127,6 +154,10 @@ def gripper_move(ctx, position, speed, force):
 
 
 def set_collision_behavior(ctx, torques, forces):
+    '''Configures the collision reflex thresholds of the Panda robot.
+    :param torques The torque thresholds for all the 7 joints. [Nm]
+    :param forces The Cartesian force thresholds. [N]
+    '''
     global node_prefix
     rospy.loginfo(
         node_prefix +
@@ -137,6 +168,7 @@ def set_collision_behavior(ctx, torques, forces):
                                upper_force_thresholds_nominal=forces)
 
 
+'''The supported action steps to compose action sequences.'''
 STEPS = {
     'moveit_cart': moveit_cart,
     'moveit_joint': moveit_joint,
@@ -146,14 +178,20 @@ STEPS = {
 
 
 def create_step(t, params):
+    '''helper method for creating a sequence step.
+    :param t step index.
+    :param params Parameter string for the step.
+    '''
     callback = STEPS[t]
     return lambda ctx: callback(ctx, **params)
 
 
 if __name__ == '__main__':
+    # Initialize the node.
     moveit_commander.roscpp_initialize(sys.argv)
     rospy.init_node('icra19_panda_with_robotiq_gripper_example')
 
+    # Wait for the hardware node to come up.
     rospy.loginfo(node_prefix +
                   'Waiting for controller_manager/load_controller')
     load_controller = rospy.ServiceProxy(
@@ -166,6 +204,7 @@ if __name__ == '__main__':
                      'Timeout waiting for controller service. Shutting down!')
         sys.exit(1)
 
+    # Parse the controllers parameter to configure the controllers to run.
     if not rospy.has_param('~controllers'):
         rospy.logerr(
             node_prefix +
@@ -177,15 +216,20 @@ if __name__ == '__main__':
             sys.exit(1)
     rospy.loginfo(node_prefix + 'Loaded controllers')
 
+    # Initialize the Context class instance.
     rospack = rospkg.RosPack()
     ctx = Context('panda_arm')
+
+    # Load the sequence steps to execute from the yaml file.
     demo_files = [
-        os.path.join(rospack.get_path('panda_with_robotiq_gripper_example'), 'config', '{}.yaml'.format(f))
+        os.path.join(rospack.get_path('panda_with_robotiq_gripper_example'),
+                     'config', '{}.yaml'.format(f))
         for f in rospy.get_param('~demos')
     ]
     configs = [rosparam.load_file(f)[0][0] for f in demo_files]
     steps = [create_step(x['type'], x['params']) for x in sum(configs, [])]
 
+    # Execute the steps.
     rospy.loginfo(node_prefix + 'Running steps')
     while not rospy.is_shutdown():
         for step in steps:
@@ -193,5 +237,8 @@ if __name__ == '__main__':
                 sys.exit(0)
             step(ctx)
         rospy.sleep(2)
-        raw_input('-------------------------------\n' + node_prefix + 'Press Enter to repeat the sequence..\n-------------------------------\n')
+        raw_input(
+            '-------------------------------\n' + node_prefix +
+            'Press Enter to repeat the sequence..\n-------------------------------\n'
+        )
     rospy.loginfo(node_prefix + 'Shutting down.')
