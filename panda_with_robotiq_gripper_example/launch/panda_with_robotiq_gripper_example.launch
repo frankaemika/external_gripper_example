@@ -26,13 +26,13 @@
     </include>
 
     <include file="$(find panda_moveit_config)/launch/move_group.launch">
-      <arg name="load_gripper" value="$(arg load_gripper)" />
+      <arg name="load_gripper" value="false" />
     </include>
-    <node name="panda_with_robotiq_gripper_example" pkg="panda_with_robotiq_gripper_example" type="panda_with_robotiq_gripper_example.py" output="screen" required="true">
+    <node name="panda_with_robotiq_gripper_example" pkg="panda_with_robotiq_gripper_example" type="panda_with_robotiq_gripper_example.py" output="screen" >
       <rosparam param="demos">[pick_and_place]</rosparam>
       <rosparam param="controllers">[position_joint_trajectory_controller]</rosparam>
     </node>
   </group>
 
-  <node pkg="rviz" type="rviz" output="screen" name="rviz" args="-d $(find icra19)/launch/panda_robotiq.rviz"/>
+  <node pkg="rviz" type="rviz" output="screen" name="rviz" args="-d $(find panda_with_robotiq_gripper_example)/launch/panda_robotiq.rviz"/>
 </launch>

@@ -14,8 +14,8 @@ import rosparam
 import os.path
 import sys
 
-node_prefix = 'icra19_panda_with_robotiq_gripper_example: '
-timeout = rospy.Duration(10)
+node_prefix = 'panda_with_robotiq_gripper_example: '
+timeout = 10.0
 
 
 class Context:
@@ -36,7 +36,7 @@ class Context:
         self.gripper_move = actionlib.SimpleActionClient(
             '/robotiq_gripper/command_robotiq_action',
             CommandRobotiqGripperAction)
-        if not self.gripper_move.wait_for_server(timeout):
+        if not self.gripper_move.wait_for_server(rospy.Duration(timeout)):
             rospy.logerr(node_prefix +
                          'Timeout waiting for required action. Shutting down!')
             sys.exit(1)
@@ -47,7 +47,7 @@ class Context:
             'controller_manager/switch_controller',
             controller_manager_msgs.srv.SwitchController)
         try:
-            self.switch_controller.wait_for_service(timeout)
+            self.switch_controller.wait_for_service(10)
         except:
             rospy.logerr(
                 node_prefix +
@@ -152,7 +152,6 @@ def create_step(t, params):
 
 
 if __name__ == '__main__':
-    global node_prefix, timeout
     moveit_commander.roscpp_initialize(sys.argv)
     rospy.init_node('icra19_panda_with_robotiq_gripper_example')
 
@@ -182,16 +181,18 @@ if __name__ == '__main__':
     rospack = rospkg.RosPack()
     ctx = Context('panda_arm')
     demo_files = [
-        os.path.join(rospack.get_path('icra19'), 'config', '{}.yaml'.format(f))
+        os.path.join(rospack.get_path('panda_with_robotiq_gripper_example'), 'config', '{}.yaml'.format(f))
         for f in rospy.get_param('~demos')
     ]
     configs = [rosparam.load_file(f)[0][0] for f in demo_files]
     steps = [create_step(x['type'], x['params']) for x in sum(configs, [])]
 
     rospy.loginfo(node_prefix + 'Running steps')
-    for step in steps:
-        if rospy.is_shutdown():
-            sys.exit(0)
-        step(ctx)
-
-    rospy.loginfo(node_prefix + 'Performed all steps, shutting down.')
+    while not rospy.is_shutdown():
+        for step in steps:
+            if rospy.is_shutdown():
+                sys.exit(0)
+            step(ctx)
+        rospy.sleep(2)
+        raw_input('-------------------------------\n' + node_prefix + 'Press Enter to repeat the sequence..\n-------------------------------\n')
+    rospy.loginfo(node_prefix + 'Shutting down.')
