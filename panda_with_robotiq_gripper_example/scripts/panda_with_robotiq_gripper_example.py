@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import actionlib_msgs.msg
-import franka_gripper.msg
 import franka_control.srv
 import geometry_msgs.msg
 from robotiq_2f_gripper_msgs.msg import CommandRobotiqGripperAction, CommandRobotiqGripperGoal, CommandRobotiqGripperResult

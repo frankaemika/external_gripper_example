@@ -2,17 +2,17 @@ cmake_minimum_required(VERSION 2.8.3)
 project(panda_with_robotiq_gripper_example)
 
 find_package(catkin REQUIRED COMPONENTS
-  # TODO(jaeh_ch)
-  actionlib #??
   actionlib_msgs
+  actionlib
   controller_manager_msgs
-  controller_interface
-  moveit_commander
-  geometry_msgs
   franka_control
+  franka_description
+  geometry_msgs
+  panda_moveit_config
+  robotiq_2f_gripper_control
+  robotiq_2f_gripper_msgs
   rosparam
   rospy
-  robotiq_2f_gripper_msgs
 )
 
 find_package(Franka 0.4.0 REQUIRED)
@@ -20,7 +20,19 @@ find_package(Eigen3 REQUIRED)
 
 include_directories(include ${catkin_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIRS})
 
-catkin_package(# TODO(jaeh_ch))
+catkin_package(
+  DEPENDS
+    actionlib_msgs
+    actionlib
+    controller_manager_msgs
+    franka_control
+    franka_description
+    geometry_msgs
+    panda_moveit_config
+    robotiq_2f_gripper_control
+    robotiq_2f_gripper_msgs
+    rosparam
+    rospy
 )
 
 install(DIRECTORY config
