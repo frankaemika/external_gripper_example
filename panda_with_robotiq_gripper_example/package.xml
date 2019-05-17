@@ -2,7 +2,7 @@
 <package format="2">
   <name>panda_with_robotiq_gripper_example</name>
   <version>0.0.0</version>
-  <description>Demo code for ICRA 2019 showcasing the usage of a Robotiq gripper with Panda robot</description>
+  <description>Demo code for ICRA 2019 showcasing the usage of a Robotiq gripper with a Panda robot.</description>
 
   <maintainer email="nicolas.neuburger@franka.de">Nicolas Neuburger</maintainer>
   <maintainer email="christoph.jaehne@franka.de">Christoph Jaehne</maintainer>

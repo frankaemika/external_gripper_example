@@ -18,11 +18,11 @@ timeout = 10.0  # [s] Time to wait for services actions and topic to become avai
 
 
 class Context:
-    '''Class that ensures that all services action and topics needed for the application are loaded.
+    '''Class that ensures that all required services, actions and topics are available.
     '''
 
     def __init__(self, move_group_name):
-        ''' Initialized the Context class by connecting to all services, actions and the movegroup.
+        ''' Initializes the Context class by connecting to all services, actions and the movegroup.
         :param move_group_name Name of the movegroup to use for motion planning.
         '''
         global node_prefix, timeout
