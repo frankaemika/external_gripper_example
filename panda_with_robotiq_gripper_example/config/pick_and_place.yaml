@@ -14,7 +14,7 @@
     acc: 0.2
     vel: 0.2
 
-# Open the Robotiq 2F-85 Gripper
+# Open the Robotiq 2F-85 gripper
 - type: gripper_move
   params:
     position: 0.085
@@ -28,7 +28,7 @@
     acc: 0.2
     vel: 0.2
 
-# Open the Robotiq 2F-85 Gripper
+# Open the Robotiq 2F-85 gripper
 - type: gripper_move
   params:
     position: 0.0
@@ -49,7 +49,7 @@
     acc: 0.2
     vel: 0.2
 
-# Open the Robotiq 2F-85 Gripper
+# Open the Robotiq 2F-85 gripper
 - type: gripper_move
   params:
     position: 0.085

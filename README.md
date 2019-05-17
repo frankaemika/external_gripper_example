@@ -31,19 +31,19 @@ panda_with_robotiq_gripper_example/config/endeffector-config.json
  3. Install all dependencies, set up your workspace and build it:
 
  ```shell
-sudo usermod -a -G dialout <your_username>  # Your user must be in the dialout group to connect to USB ports
-sudo apt install ros-kinetic-libfranka      # If not already installed
-sudo apt install ros-kinetic-franka-ros
-mkdir -p catkin_ws/src                      # Create a folder for your workspace
-cd catkin_ws/src
-git clone https://github.com/Danfoa/robotiq_2finger_grippers.git
-git clone https://github.com/ros-planning/panda_moveit_config.git
-git clone https://github.com/frankaemika/icra19_gripper_example.git
-cd ..
-source /opt/ros/kinetic/setup.bash
-catkin_make
-source devel/setup.bash
-```
+    sudo usermod -a -G dialout <your_username>  # Your user must be in the dialout group to connect to USB ports
+    sudo apt install ros-kinetic-libfranka      # If not already installed
+    sudo apt install ros-kinetic-franka-ros
+    mkdir -p catkin_ws/src                      # Create a folder for your workspace
+    cd catkin_ws/src
+    git clone https://github.com/Danfoa/robotiq_2finger_grippers.git
+    git clone https://github.com/ros-planning/panda_moveit_config.git
+    git clone https://github.com/frankaemika/icra19_gripper_example.git
+    cd ..
+    source /opt/ros/kinetic/setup.bash
+    catkin_make
+    source devel/setup.bash
+ ```
 
  4. Launch the example application with
 
