@@ -1,3 +1,6 @@
+# This files configures a sequence of actions that can be executed with the
+# provided python script. Feel free to configure your own sequence.
+
 # Determination of Panda's Collision Behavior
 - type: set_collision_behavior
   params:
@@ -11,7 +14,7 @@
     acc: 0.2
     vel: 0.2
 
-# Open the Robotiq 2F-85 Gripper 
+# Open the Robotiq 2F-85 gripper
 - type: gripper_move
   params:
     position: 0.085
@@ -25,7 +28,7 @@
     acc: 0.2
     vel: 0.2
 
-# Open the Robotiq 2F-85 Gripper 
+# Open the Robotiq 2F-85 gripper
 - type: gripper_move
   params:
     position: 0.0
@@ -46,7 +49,7 @@
     acc: 0.2
     vel: 0.2
 
-# Open the Robotiq 2F-85 Gripper 
+# Open the Robotiq 2F-85 gripper
 - type: gripper_move
   params:
     position: 0.085

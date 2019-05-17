@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<launch>
+
+  <arg name="robot_ip" />         <!-- ip of your Panda robot -->
+  <arg name="gripper_dev_name"/>  <!-- e.g. /dev/ttyUSB1 -->
+
+  <group ns="robotiq_gripper">
+
+    <!-- start the gripper hardware node -->
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find panda_with_robotiq_gripper_example)/robots/robotiq_mounted_on_panda.urdf.xacro" />
+    <include file="$(find robotiq_2f_gripper_control)/launch/robotiq_action_server.launch">
+        <arg name="comport" value="$(arg gripper_dev_name)"/>
+    </include>
+
+    <!-- start nodes to help visualize the gripper later in RViz -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="100.0"/>
+    </node>
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <rosparam param="source_list">[/joint_states]</rosparam>
+        <rosparam param="use_gui">false</rosparam>
+    </node>
+
+  </group>
+
+  <group ns="panda">
+
+    <node pkg="tf" type="static_transform_publisher" name="map_frame_static_publisher" args="0 0 0 0 0 0 world panda_link0 100" />
+
+    <!-- start the hardware node for the Panda robot -->
+    <include file="$(find franka_control)/launch/franka_control.launch">
+      <arg name="robot_ip" value="$(arg robot_ip)" />
+      <arg name="load_gripper" value="false" />
+    </include>
+
+    <!-- start the move group for motion planning -->
+    <include file="$(find panda_moveit_config)/launch/move_group.launch">
+      <arg name="load_gripper" value="false" />
+    </include>
+
+    <!-- start the example script to execute a pick-and-place-sequence -->
+    <node name="panda_with_robotiq_gripper_example" pkg="panda_with_robotiq_gripper_example" type="panda_with_robotiq_gripper_example.py" output="screen" >
+      <rosparam param="demos">[pick_and_place]</rosparam>
+      <rosparam param="controllers">[position_joint_trajectory_controller]</rosparam>
+    </node>
+
+  </group>
+
+  <!-- start RViz for visualizing the robot -->
+  <node pkg="rviz" type="rviz" output="screen" name="rviz" args="-d $(find panda_with_robotiq_gripper_example)/launch/panda_robotiq.rviz"/>
+
+</launch>

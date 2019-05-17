@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="panda_robotiq">
+
+  <!-- connect the robotiq gripper to the panda arm -->
+  <link name="panda_link8"/>
+  <joint name="panda_robotiq_attachment_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 1.5707963268"/>
+    <parent link="panda_link8"/>
+    <child link="robotiq_arg2f_base_link"/>
+  </joint>
+
+  <!-- add the robotiq gripper description -->
+  <xacro:include filename="$(find robotiq_2f_85_gripper_visualization)/urdf/robotiq_arg2f_85_model.xacro"/>
+
+</robot>
