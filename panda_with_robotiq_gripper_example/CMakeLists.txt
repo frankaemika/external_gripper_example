@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.4)
 project(panda_with_robotiq_gripper_example)
 
 find_package(catkin REQUIRED COMPONENTS
@@ -14,11 +14,6 @@ find_package(catkin REQUIRED COMPONENTS
   rosparam
   rospy
 )
-
-find_package(Franka 0.4.0 REQUIRED)
-find_package(Eigen3 REQUIRED)
-
-include_directories(include ${catkin_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIRS})
 
 catkin_package(
   DEPENDS
