@@ -26,9 +26,9 @@ Note: The are other options of ros_packages for robotiq gripper like the [offici
 panda_with_robotiq_gripper_example/config/endeffector-config.json
 ```
 
- 2. Connect the gripper to your pc via USB. In our setup we use e.g. a Robotiq K-1444 Universal Controller which is connected via USB to the control Pc. See Robotiq's support page for further information (https://robotiq.com/de/produkte/adaptiver-2-finger-robotergreifer-2f85-140).
+ 2. Connect the gripper to your PC via USB. In our setup we use e.g. a Robotiq K-1444 Universal Controller which is connected via USB to the control PC. See Robotiq's support page for further information (https://robotiq.com/de/produkte/adaptiver-2-finger-robotergreifer-2f85-140).
 
- 3. Make sure to install all dependencies, set up your workspace and build it:
+ 3. Install all dependencies, set up your workspace and build it:
 
  ```shell
 sudo usermod -a -G dialout <your_username>  # Your user must be in the dialout group to connect to USB ports
@@ -45,7 +45,7 @@ catkin_make
 source devel/setup.bash
 ```
 
- 4. Now you can launch the example application with
+ 4. Launch the example application with
 
 ```shell
 roslaunch panda_with_robotiq_gripper_example panda_with_robotiq_gripper_example.launch robot_ip:=<robot-ip> gripper_dev_name:=<usb-bus-of-the-gripper>
