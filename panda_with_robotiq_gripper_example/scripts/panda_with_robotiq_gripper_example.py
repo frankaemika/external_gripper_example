@@ -93,8 +93,8 @@ def moveit_joint(ctx, position, acc=0.1, vel=0.1):
     '''Performs a joint motion with moveit.
     :param ctx A Context class instance.
     :param position The joint pose target.
-    :param acc the acceleration for the motion. [rad/s^2]
-    :param vel the velocity for the motion.  [rad/s]
+    :param acc a scaling factor for optionally reducing the maximum joint acceleration (0,1]
+    :param vel a scaling factor for optionally reducing the maximum joint velocity (0,1]
     '''
     global node_prefix
     ctx.load_controllers(['position_joint_trajectory_controller'])
@@ -109,8 +109,8 @@ def moveit_cart(ctx, pos, rot, acc=0.1, vel=0.1):
     '''Performs a Cartesian motion with moveit.
     :param ctx A Context class instance.
     :param position The Cartesian pose target.
-    :param acc the acceleration for the motion.
-    :param vel the velocity for the motion.
+    :param acc a scaling factor for optionally reducing the maximum joint acceleration (0,1]
+    :param vel a scaling factor for optionally reducing the maximum joint velocity (0,1]
     '''
     global node_prefix
     ctx.load_controllers(['position_joint_trajectory_controller'])
@@ -137,7 +137,7 @@ def gripper_move(ctx, position, speed, force):
     ''' Moves the gripper to a target position (width).
     :param ctx A Context class instance.
     :param position The target width. [m]
-    :param speed The target speed for the motion. [m/s]
+    :param speed The target end-effector speed for the motion. [m/s]
     :param force The force to apply. [N]
     '''
     global node_prefix
