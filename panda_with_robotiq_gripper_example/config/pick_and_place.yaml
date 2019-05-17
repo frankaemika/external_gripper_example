@@ -1,0 +1,64 @@
+# This file configures a sequence of actions that can be executed with the
+# provided python script. Feel free to configure your own sequence.
+
+# Determination of Panda's Collision Behavior
+- type: set_collision_behavior
+  params:
+    torques: [20.0, 20.0, 18.0, 18.0, 16.0, 14.0, 12.0]
+    forces: [20.0, 20.0, 30.0, 25.0, 25.0, 25.0]
+
+# Move to initial joint configuration
+- type: moveit_joint
+  params:
+    position: [0.550178,-0.130772,-0.589592,-2.14804,-0.062015,1.98564,1.66215]
+    acc: 0.2
+    vel: 0.2
+
+# Open the Robotiq 2F-85 gripper
+- type: gripper_move
+  params:
+    position: 0.085
+    speed: 0.2
+    force: 0.2
+
+# Move to table top pick joint configuration
+- type: moveit_joint
+  params:
+    position: [1.29891,0.369655,-0.548591,-1.98494,0.289575,2.2957,1.47955]
+    acc: 0.2
+    vel: 0.2
+
+# Open the Robotiq 2F-85 gripper
+- type: gripper_move
+  params:
+    position: 0.0
+    speed: 0.2
+    force: 0.2
+
+# Move to initial joint configuration
+- type: moveit_joint
+  params:
+    position: [2.15609,0.368808,-2.16853,-2.05541,0.257579,1.91049,1.20722]
+    acc: 0.2
+    vel: 0.2
+
+# Move to table top place joint configuration
+- type: moveit_joint
+  params:
+    position: [1.90758,-0.2538,-2.86316,-2.11619,-0.101574,2.40598,0.676565]
+    acc: 0.2
+    vel: 0.2
+
+# Open the Robotiq 2F-85 gripper
+- type: gripper_move
+  params:
+    position: 0.085
+    speed: 0.2
+    force: 0.2
+
+# Move to initial joint configuration
+- type: moveit_joint
+  params:
+    position: [0.550178,-0.130772,-0.589592,-2.14804,-0.062015,1.98564,1.66215]
+    acc: 0.2
+    vel: 0.2
