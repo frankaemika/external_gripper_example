@@ -38,7 +38,7 @@ Note: The are other options of ros_packages for robotiq gripper like the [offici
     cd catkin_ws/src
     git clone https://github.com/Danfoa/robotiq_2finger_grippers.git
     git clone https://github.com/ros-planning/panda_moveit_config.git
-    git clone https://github.com/frankaemika/icra19_gripper_example.git
+    git clone https://github.com/frankaemika/external_gripper_example.git
     cd ..
     source /opt/ros/kinetic/setup.bash
     catkin_make
@@ -58,7 +58,7 @@ Note: You need pass the USB-bus to which the gripper is connected to the launch 
 Each of the sequential steps of the pick-and-place demo are described in the file:
 
 ```
-icra19/config/pick_and_place.yaml
+panda_with_robotiq_gripper_example/config/pick_and_place.yaml
 ```
 
 Feel free to customize them to configure your own sequence.

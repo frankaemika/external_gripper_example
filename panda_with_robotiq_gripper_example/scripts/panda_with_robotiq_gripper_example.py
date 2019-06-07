@@ -189,7 +189,7 @@ def create_step(t, params):
 if __name__ == '__main__':
     # Initialize the node.
     moveit_commander.roscpp_initialize(sys.argv)
-    rospy.init_node('icra19_panda_with_robotiq_gripper_example')
+    rospy.init_node('panda_with_robotiq_gripper_example')
 
     # Wait for the hardware node to come up.
     rospy.loginfo(node_prefix +
