@@ -1,4 +1,4 @@
-# icra19-gripper-example #
+# external-gripper-example #
 
 This repository provides example code on how Panda can be controlled via `franka_ros` in combination with an external gripper. In this particular example, the Robotiq 2F-85 gripper is used mounted on the flange of the Panda (see `panda_with_robotiq_gripper_example.png`). The package allows the user to run a configurable pick-and-place example sequence.
 This software is tested with the following dependency version:
